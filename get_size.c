@@ -26,6 +26,8 @@ int verify(char **av)
         if ( av[2][i] != '.' && av[2][i] != 'o')
             return 84;
     }
+    if (my_strlen(av[2]) > my_getnbr(av[1]))
+        return 84;
     return 0;
 }
 
@@ -36,13 +38,25 @@ int pattern(char **av)
     setting_up(get_map_pattern(av), my_getnbr(av[1]), my_getnbr(av[1]));
 }
 
+int verify_size(char *buffer)
+{
+    int compt = 0;
+
+    for (int i = my_intlen(my_getnbr(buffer)) + 1; buffer[i]; i++) {
+        if (buffer[i] == '\n')
+            compt++;
+    }
+    if ( compt != my_getnbr(buffer))
+        return 84;
+}
+
 int open_file(char *buffer, char **world, int fd, char **av)
 {
     fd = open(av[1], O_RDONLY);
     if (fd == -1)
         return 84;
     read(fd, buffer, get_size(av) + 1);
-    if (my_getnbr(buffer) <= 0)
+    if (my_getnbr(buffer) <= 0 || verify_size(buffer) == 84)
         return 84;
     world = get_map(buffer, my_getnbr(buffer));
     setting_up(world, my_getnbr(buffer), len_line(buffer, my_getnbr
