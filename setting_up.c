@@ -16,7 +16,7 @@ static void free_array(char **world)
 
 int len_line(char *str , int len)
 {
-    int compt;
+    int compt = 0;
     int i = (my_intlen(len) + 1);
 
     for (i; str[i] != '\n'; i++) {
@@ -30,7 +30,6 @@ char **get_map(char *buffer, int len)
 {
     char **world;
     int i;
-    int col;
     int line = len_line(buffer, len);
     int j = my_intlen(len) + 1;
 
@@ -129,9 +128,9 @@ char **get_map_pattern(char **av)
 
 static int error_handling(int ac, char **av)
 {
-    if ( my_getnbr(av[1]) < 0)
-        return 84;
     if (ac != 2 && ac != 3)
+        return 84;
+    if ( my_getnbr(av[1]) < 0)
         return 84;
     return 0;
 }
@@ -140,16 +139,17 @@ int main(int ac, char **av)
 {
     char *buffer;
     int fd;
-    int len;
     char **world;
     int line;
 
-    buffer = malloc(sizeof(char) * get_size(av));
     if (error_handling(ac, av) == 84)
         return 84;
+    buffer = malloc(sizeof(char) * (get_size(av) + 1));
     if (ac == 2) {
         fd = open(av[1], O_RDONLY);
-        len = read(fd, buffer, get_size(av));
+        read(fd, buffer, get_size(av) + 1);
+        if (my_getnbr(buffer) == 0)
+            return 84;
         line = len_line(buffer, my_getnbr(buffer));
         world = get_map(buffer, my_getnbr(buffer));
         setting_up(world, my_getnbr(buffer), line);

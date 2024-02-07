@@ -16,7 +16,7 @@ int my_intlen(long nb)
     }
     if (nb == 0)
         return compt + 1;
-    for (int i; nb > 0; i++) {
+    for (int i = 0; nb > 0; i++) {
         compt++;
         nb /= 10;
     }
