@@ -37,8 +37,10 @@ char **get_map(char *buffer, int len)
     world = malloc(sizeof(char *) * (len + 1));
     for (i = 0; buffer[j] != '\0'; i++) {
         world[i] = malloc(sizeof(char) * (line + 1));
-        for ( int k = 0; buffer[j] != '\n'; j++)
-            world[i][k++] = buffer[j];
+        for ( int k = 0; buffer[j] != '\n'; j++) {
+            world[i][k] = buffer[j];
+            k++;
+        }
         world[i][line] = '\0';
         j++;
     }
