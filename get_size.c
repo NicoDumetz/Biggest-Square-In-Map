@@ -22,6 +22,8 @@ int verify(char **av)
 {
     char **world = get_map_pattern(av);
 
+    if (my_getnbr(av[1]) <= 0)
+        return 84;
     if (my_strlen(av[2]) == 0)
         return 84;
     for (int i = 0; av[2][i]; i++) {
