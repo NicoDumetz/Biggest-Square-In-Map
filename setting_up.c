@@ -145,9 +145,11 @@ int main(int ac, char **av)
         return 84;
     buffer = malloc(sizeof(char) * (get_size(av) + 1));
     if (ac == 2) {
-        open_file(buffer, world, fd, av);
+        if (open_file(buffer, world, fd, av) == 84)
+            return 84;
     } else {
         if ( pattern(av) == 84)
             return 84;
     }
+    free(buffer);
 }
