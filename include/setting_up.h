@@ -23,9 +23,10 @@
     #include <stdint.h>
     #include <stddef.h>
     #include <wchar.h>
+    #include <sys/stat.h>
 int my_strlen(char const *str);
 int my_intlen(long nb);
 int my_getnbr(char const *str);
-
+int get_size(char **av);
 
 #endif

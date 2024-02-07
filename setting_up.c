@@ -69,6 +69,7 @@ static void draw_square(char **world, int max, int max_i, int max_j)
         write(1, world[i], my_strlen(world[i]));
         write(1, "\n", 1);
     }
+    free_array(world);
 }
 
 static int **set_matrix(int **matrix, int len, int line)
@@ -137,24 +138,23 @@ static int error_handling(int ac, char **av)
 
 int main(int ac, char **av)
 {
-    char buffer[3000000];
+    char *buffer;
     int fd;
     int len;
     char **world;
     int line;
 
-    if ( error_handling(ac, av) == 84)
+    buffer = malloc(sizeof(char) * get_size(av));
+    if (error_handling(ac, av) == 84)
         return 84;
-    if ( ac == 2) {
+    if (ac == 2) {
         fd = open(av[1], O_RDONLY);
-        len = read(fd, buffer, 3000000);
+        len = read(fd, buffer, get_size(av));
         line = len_line(buffer, my_getnbr(buffer));
         world = get_map(buffer, my_getnbr(buffer));
         setting_up(world, my_getnbr(buffer), line);
         close(fd);
     } else {
-        world = get_map_pattern(av);
-        setting_up(world, my_getnbr(av[1]), my_getnbr(av[1]));
+        setting_up(get_map_pattern(av), my_getnbr(av[1]), my_getnbr(av[1]));
     }
-    free_array(world);
 }
