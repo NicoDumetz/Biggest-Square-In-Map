@@ -145,14 +145,7 @@ int main(int ac, char **av)
         return 84;
     buffer = malloc(sizeof(char) * (get_size(av) + 1));
     if (ac == 2) {
-        fd = open(av[1], O_RDONLY);
-        read(fd, buffer, get_size(av) + 1);
-        if (my_getnbr(buffer) <= 0)
-            return 84;
-        world = get_map(buffer, my_getnbr(buffer));
-        setting_up(world, my_getnbr(buffer), len_line(buffer, my_getnbr
-        (buffer)));
-        close(fd);
+        open_file(buffer, world, fd, av);
     } else {
         if ( pattern(av) == 84)
             return 84;

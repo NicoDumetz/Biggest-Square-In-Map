@@ -32,4 +32,9 @@ char **get_map_pattern(char **av);
 int verify(char **av);
 int pattern(char **av);
 void setting_up(char **world, int len, int line);
+int open_file(char *buffer, char **world, int fd, char **av);
+char **get_map(char *buffer, int len);
+int len_line(char *str , int len);
+
+
 #endif

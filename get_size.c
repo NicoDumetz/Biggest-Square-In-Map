@@ -35,3 +35,17 @@ int pattern(char **av)
         return 84;
     setting_up(get_map_pattern(av), my_getnbr(av[1]), my_getnbr(av[1]));
 }
+
+int open_file(char *buffer, char **world, int fd, char **av)
+{
+    fd = open(av[1], O_RDONLY);
+    if (fd == -1)
+        return 84;
+    read(fd, buffer, get_size(av) + 1);
+    if (my_getnbr(buffer) <= 0)
+        return 84;
+    world = get_map(buffer, my_getnbr(buffer));
+    setting_up(world, my_getnbr(buffer), len_line(buffer, my_getnbr
+    (buffer)));
+    close(fd);
+}
