@@ -124,6 +124,15 @@ char **get_map_pattern(char **av)
     return world;
 }
 
+static int error_handling(int ac, char **av)
+{
+    if ( my_getnbr(av[1]) < 0)
+        return 84;
+    if (ac != 2 && ac != 3)
+        return 84;
+    return 0;
+}
+
 int main(int ac, char **av)
 {
     char buffer[3000000];
@@ -132,6 +141,8 @@ int main(int ac, char **av)
     char **world;
     int line;
 
+    if ( error_handling(ac, av) == 84)
+        return 84;
     if ( ac == 2) {
         fd = open(av[1], O_RDONLY);
         len = read(fd, buffer, 3000000);
@@ -139,7 +150,7 @@ int main(int ac, char **av)
         world = get_map(buffer, my_getnbr(buffer));
         setting_up(world, my_getnbr(buffer), line);
         close(fd);
-    } else if ( ac == 3) {
+    } else {
         world = get_map_pattern(av);
         setting_up(world, my_getnbr(av[1]), my_getnbr(av[1]));
     }
