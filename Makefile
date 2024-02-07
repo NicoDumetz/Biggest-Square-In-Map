@@ -17,8 +17,6 @@ OBJ	=	$(SRC:.c=.o)
 
 NAME	=	setting_up
 
-CFLAGS += -g
-
 all:	$(NAME)
 
 $(NAME):	$(OBJ)
