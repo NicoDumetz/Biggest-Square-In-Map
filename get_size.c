@@ -17,3 +17,21 @@ int get_size(char **av)
     size = file.st_size;
     return size;
 }
+
+int verify(char **av)
+{
+    char **world = get_map_pattern(av);
+
+    for (int i = 0; av[2][i]; i++) {
+        if ( av[2][i] != '.' && av[2][i] != 'o')
+            return 84;
+    }
+    return 0;
+}
+
+int pattern(char **av)
+{
+    if (verify(av) == 84)
+        return 84;
+    setting_up(get_map_pattern(av), my_getnbr(av[1]), my_getnbr(av[1]));
+}

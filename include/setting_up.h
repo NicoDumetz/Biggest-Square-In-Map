@@ -28,5 +28,8 @@ int my_strlen(char const *str);
 int my_intlen(long nb);
 int my_getnbr(char const *str);
 int get_size(char **av);
-
+char **get_map_pattern(char **av);
+int verify(char **av);
+int pattern(char **av);
+void setting_up(char **world, int len, int line);
 #endif

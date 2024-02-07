@@ -95,7 +95,7 @@ void setting_up(char **world, int len, int line)
     for (int i = 1; i < len + 1; i++) {
         for ( int j = 1; j < line + 1; j++) {
             matrix[i][j] = world[i - 1][j - 1] == '.' ? 1 +
-            min( matrix[i - 1][j], matrix[i][j - 1], matrix[i - 1][j - 1]) : 0;
+            min(matrix[i - 1][j], matrix[i][j - 1], matrix[i - 1][j - 1]) : 0;
             max_j = matrix[i][j] > max ? j : max_j;
             max_i = matrix[i][j] > max ? i : max_i;
             max = matrix[i][j] > max ? matrix[i][j] : max;
@@ -140,7 +140,6 @@ int main(int ac, char **av)
     char *buffer;
     int fd;
     char **world;
-    int line;
 
     if (error_handling(ac, av) == 84)
         return 84;
@@ -150,11 +149,12 @@ int main(int ac, char **av)
         read(fd, buffer, get_size(av) + 1);
         if (my_getnbr(buffer) == 0)
             return 84;
-        line = len_line(buffer, my_getnbr(buffer));
         world = get_map(buffer, my_getnbr(buffer));
-        setting_up(world, my_getnbr(buffer), line);
+        setting_up(world, my_getnbr(buffer), len_line(buffer, my_getnbr
+        (buffer)));
         close(fd);
     } else {
-        setting_up(get_map_pattern(av), my_getnbr(av[1]), my_getnbr(av[1]));
+        if ( pattern(av) == 84)
+            return 84;
     }
 }
