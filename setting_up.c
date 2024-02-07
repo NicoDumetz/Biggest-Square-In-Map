@@ -64,7 +64,7 @@ static void draw_square(char **world, int max, int max_i, int max_j)
         }
     }
     for (int i = 0; world[i]; i++) {
-        write(1, world[i], my_strlen(world[i]) - 1);
+        write(1, world[i], my_strlen(world[i]));
         write(1, "\n", 1);
     }
 }
