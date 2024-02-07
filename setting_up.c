@@ -128,8 +128,9 @@ char **get_map_pattern(char **av)
 
 static int error_handling(int ac, char **av)
 {
-    if (ac != 2 && ac != 3)
+    if (ac != 2 && ac != 3) {
         return 84;
+    }
     if ( my_getnbr(av[1]) < 0)
         return 84;
     return 0;

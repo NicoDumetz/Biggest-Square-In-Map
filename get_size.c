@@ -26,8 +26,6 @@ int verify(char **av)
         if ( av[2][i] != '.' && av[2][i] != 'o')
             return 84;
     }
-    if (my_strlen(av[2]) > my_getnbr(av[1]))
-        return 84;
     return 0;
 }
 
