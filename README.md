@@ -49,6 +49,10 @@ o....o$
 ..o...$
 ```
 
+## Grade
+
+I received a score of 100% on this project.
+
 ## Authors
 Thank you for checking out this project! If you have any questions or would like to collaborate, feel free to contact me.
 
